@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:background="@drawable/appwidget_bg">
+	<LinearLayout android:id="@+id/ToggleButton"
+		android:orientation="vertical" android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:background="@drawable/appwidget_button"
+		android:clickable="true" android:focusable="true" >
+		<TextView android:id="@+id/ToggleText" android:text="@string/widget_message"
+			android:layout_width="fill_parent" android:layout_height="0dp"
+			android:gravity="center" android:layout_weight="1" />
+		<ImageView android:id="@+id/ToggleIndicator"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:scaleType="fitXY" />
+	</LinearLayout>
+</LinearLayout>

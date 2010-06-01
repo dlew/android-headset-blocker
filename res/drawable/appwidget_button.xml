@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Need to set variablePadding to true or else this drawable messes up 1.x layouts. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android" android:variablePadding="true">
+
+    <item android:state_pressed="true"
+        android:drawable="@drawable/appwidget_press" />
+
+    <item android:state_focused="true" android:state_enabled="true"
+        android:state_window_focused="true"
+        android:drawable="@drawable/appwidget_focus" />
+
+    <item android:drawable="@android:color/transparent" />
+</selector>
