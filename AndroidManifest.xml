@@ -4,6 +4,15 @@
 	android:versionName="1.0">
 	<application android:icon="@drawable/icon" android:label="@string/app_name">
 
+		<activity
+			android:name=".app.HeadsetBlockerActivity"
+			android:label="@string/app_name">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+
 		<!-- Receives and blocks MEDIA_BUTTON actions -->
 		<receiver android:name="MediaButtonBlocker" android:enabled="false">
 			<!-- It's over 9000! -->

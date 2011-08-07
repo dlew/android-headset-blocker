@@ -6,7 +6,6 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.util.Log;
 import android.widget.RemoteViews;
@@ -16,10 +15,7 @@ public class ToggleWidgetProvider extends AppWidgetProvider {
 	private static final ComponentName THIS_APPWIDGET = new ComponentName("com.idunnolol.headsetblocker",
 			"com.idunnolol.headsetblocker.ToggleWidgetProvider");
 
-	private static final ComponentName BLOCKER = new ComponentName("com.idunnolol.headsetblocker",
-			"com.idunnolol.headsetblocker.MediaButtonBlocker");
-
-	private static final String TOGGLE_ACTION = "com.idunnolol.headsetblocker.TOGGLE";
+	public static final String TOGGLE_ACTION = "com.idunnolol.headsetblocker.TOGGLE";
 
 	private static final int F_TRANSITION = 1;
 
@@ -57,13 +53,13 @@ public class ToggleWidgetProvider extends AppWidgetProvider {
 		if (!isToggling) {
 			isToggling = true;
 			updateWidget(context, F_TRANSITION);
-			toggleBlocking(context);
+			MediaButtonBlocker.toggleBlocking(context);
 			updateWidget(context, 0);
 			isToggling = false;
 		}
 	}
 
-	private RemoteViews buildUpdate(Context context, int flags) {
+	private static RemoteViews buildUpdate(Context context, int flags) {
 		Resources r = context.getResources();
 		int buttonImageId;
 		int textColor;
@@ -71,7 +67,7 @@ public class ToggleWidgetProvider extends AppWidgetProvider {
 			buttonImageId = R.drawable.appwidget_ind_mid;
 			textColor = r.getColor(android.R.color.darker_gray);
 		}
-		else if (isBlocking(context)) {
+		else if (MediaButtonBlocker.isBlocking(context)) {
 			buttonImageId = R.drawable.appwidget_ind_light;
 			textColor = r.getColor(android.R.color.white);
 		}
@@ -89,25 +85,9 @@ public class ToggleWidgetProvider extends AppWidgetProvider {
 		return views;
 	}
 
-	private void updateWidget(Context context, int flags) {
+	public static void updateWidget(Context context, int flags) {
 		RemoteViews views = buildUpdate(context, flags);
 		final AppWidgetManager gm = AppWidgetManager.getInstance(context);
 		gm.updateAppWidget(THIS_APPWIDGET, views);
-	}
-
-	private boolean isBlocking(Context context) {
-		PackageManager pm = context.getPackageManager();
-		return pm.getComponentEnabledSetting(BLOCKER) == PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
-	}
-
-	private void toggleBlocking(Context context) {
-		if (Params.LOGGING_ENABLED) {
-			Log.i(Params.LOGGING_TAG, "Toggling MEDIA_BUTTON blocking.");
-		}
-
-		PackageManager pm = context.getPackageManager();
-		int newState = (isBlocking(context)) ? PackageManager.COMPONENT_ENABLED_STATE_DISABLED
-				: PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
-		pm.setComponentEnabledSetting(BLOCKER, newState, PackageManager.DONT_KILL_APP);
 	}
 }
