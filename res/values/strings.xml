@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Headset Blocker</string>
     <string name="widget_message">Block Headset</string>
 
@@ -7,4 +8,5 @@
     <string name="toggle_on">Headset Blocked</string>
     <string name="toggle_off">Headset Not Blocked</string>
     <string name="explanation">Toggle the button above to enable/disable headset button blocking.\n\nThere is also a widget that you can add to your home screen which you can use to enable/disable headset button blocking.  To add it, go to a home screen with free space on it, click the "menu" button, select "add", then "widgets."  Headset Blocker shoudl be available there.</string>
+
 </resources>
